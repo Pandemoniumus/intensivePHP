@@ -1,6 +1,6 @@
 <?php
 
-session_start();
+/*session_start();*/
 require_once 'parts/header.php';
 
 foreach ($_SESSION['cart'] as $product) {
@@ -14,7 +14,7 @@ foreach ($_SESSION['cart'] as $product) {
                 <img src="img/<?=$product['img']?>" alt="<?=$product['rus_name']?>">
             </a>
             <div class="cart-descr">
-                <?=$product['rus_name']?> в количестве <?=$product['quantity']?> шт на сумму <?=$product['price']?> рублей
+                <?=$product['rus_name']?> в количестве <?=$product['quantity']?> шт на сумму <?=$product['price']*$product['quantity']?> рублей
             </div>
             <button type="submit">Удалить</button>
         </div>
