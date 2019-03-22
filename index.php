@@ -8,6 +8,9 @@
         $products = $connect->query("SELECT * FROM products 
                                      JOIN cats ON cat_id=cats.id AND name='$currentCat'");
         $products = $products->fetchAll(PDO::FETCH_ASSOC);
+        if (!$products){
+            die("Такой категории не найдено");
+        }
 
     } else {
         $products = $connect->query("SELECT * FROM products");
@@ -37,10 +40,7 @@ echo "</pre>";
                     </a>
                     <div class="label"><?= $product['rus_name']?> (<?= $product['price']?> рублей)</div>
                     <!--<button type="submit">Добавить в корзину</button>-->
-                    <form action="actions/add.php" method="post">
-                        <input type="hidden" name="id" value="<?= $product['id']?>">
-                        <input type="submit" value="Добавить в корзину">
-                    </form>
+                    <?php require ('parts/add-form.php'); ?>
 
                 </div>
 

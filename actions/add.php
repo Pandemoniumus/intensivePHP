@@ -13,6 +13,11 @@ if (isset($_POST['id'])){
     unset($_SESSION['totalPrice']);
     unset($_SESSION['cart']);*/
 
+   if (isset($_SESSION['order'])){
+       unset($_SESSION['order']);
+   }
+
+
     $id = $_POST['id'];
     $product = $connect->query("SELECT * FROM products WHERE id = '$id'");
     $product = $product->fetch(PDO::FETCH_ASSOC);

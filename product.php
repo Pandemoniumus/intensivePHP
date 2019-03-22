@@ -1,10 +1,15 @@
-<?php require_once 'parts/header.php';
+<?php require_once 'db/db.php';
 
 if (isset($_GET['product'])){
     $currentProduct = $_GET['product'];
     $product = $connect->query("select * from products WHERE title='$currentProduct'");
     $product = $product->fetch(PDO::FETCH_ASSOC);
 
+    if (!$product){
+        header("location: index.php");
+    }
+
+    require_once 'parts/header.php';
 /*
     echo  "<pre>";
     var_dump($product);
@@ -22,8 +27,5 @@ if (isset($_GET['product'])){
     <div class="descr"><?= $product['descr']?></div>
     <img width="300" src="img/<?= $product['img']?>" alt="Фото">
     <!--<button type="submit">Добавить в корзину</button>-->
-    <form action="actions/add.php" method="post">
-        <input type="hidden" name="id" value="<?= $product['id']?>">
-        <input type="submit" value="Добавить в корзину">
-    </form>
+    <?php require ('parts/add-form.php'); ?>
 </div>
